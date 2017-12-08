@@ -5,17 +5,17 @@ const webpack = require('webpack');
 const config = require('../build/webpack.dev.js');    // webpack 开发环境配置
 const compiler = webpack(config);
 const history = require('connect-history-api-fallback');
-// const router = require('./dev-server/router');
+const router = require('./router');
 // const setSocket = require('./dev-server/socket');
 
 // mock
-// app.use('/v2', router);
+app.use(router);
 
 // redirect
 app.use(history({
     index: '/bookmarket.html',
     rewrites: [
-        
+
     ]
 }));
 
@@ -32,3 +32,5 @@ app.use(require("webpack-hot-middleware")(compiler));
 http.listen(8888, () => {
     console.log('bookmarket listenning on port 8888!\n');
 });
+
+// '192.168.1.240',

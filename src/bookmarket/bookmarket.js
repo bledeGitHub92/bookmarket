@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import BookMarket from './bookmarket.vue';
 // import initStore from './store/store';
-// import router from './router/router';
+import router from './router/router';
 // import { sync } from 'vuex-router-sync';
 
 window.addEventListener('load', () => {
@@ -12,7 +12,7 @@ window.addEventListener('load', () => {
     new Vue({
         el: 'book-market',
         // store,
-        // router,
+        router,
         components: {
             BookMarket
         }
