@@ -11,20 +11,7 @@
             </span>
         </section>
         <!-- 书单推荐  -->
-        <section class="recommand">
-            <div class="title">
-                <h2>书单推荐</h2>
-                <div class="recommand-link">
-                    <a href="#">
-                        全部 58 个书单
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="icon">
-                            <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <horizontal-scroll></horizontal-scroll>
-        </section>
+        <horizontal-scroll></horizontal-scroll>
         <!-- 导航条容器  -->
         <div class="nav-container" ref="nav-container">
             <div :class="[{'is-fixed':navFixed},'nav-wrapper']">
@@ -39,12 +26,11 @@
 </template>
 
 <script>
+import ajax from '../../lib/ajax';
 import HorizontalScroll from './index/HorizontalScroll.vue';
 import NavPrimary from './index/NavPrimary.vue';
 import NavSecondary from './index/NavSecondary.vue';
 import BookList from './index/BookList.vue';
-import ajax from '../../lib/ajax';
-
 
 export default {
     name: 'IndexView',
@@ -53,10 +39,7 @@ export default {
         BookList
     },
     props: {
-        id: {
-            type: String,
-            required: true
-        }
+        id: String
     },
     data() {
         return {
@@ -111,7 +94,7 @@ export default {
             bookList: [],
             // 导航的 position 是否是 fixed
             navFixed: false,
-            navHolderHeight: 0
+            navHolderHeight: 0,
         }
     },
     computed: {
@@ -126,11 +109,6 @@ export default {
         }
     },
     methods: {
-        // 子组件 nav-primary 的点击事件
-        changePrimary(navId) {
-            document.documentElement.scrollTop = 0;
-            this.linkActive = navId;
-        },
         // 初始化 linkActive
         initLinkActive() {
             var id = this.id;
@@ -138,6 +116,17 @@ export default {
                 primary => primary.id === id || primary.subCategories.some(secondary => secondary.id === id)
             );
             this.linkActive = param;
+        },
+        // 子组件 nav-primary 的点击事件
+        changePrimary(navId) {
+            var scrollTop = this.$refs['nav-container'].offsetTop;
+            if (document.documentElement.scrollTop > scrollTop) {
+                document.documentElement.scrollTop = scrollTop;
+            }
+            if (document.body.scrollTop > scrollTop) {
+                document.body.scrollTop = scrollTop;
+            }
+            this.linkActive = navId;
         },
         // 获取书单
         getBooks(isAdd) {
@@ -193,6 +182,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.index {
+    background-color: #fff;
+}
+
 .search-bar {
     position: relative;
     top: 0;
@@ -218,24 +211,7 @@ export default {
     }
 }
 
-.recommand {
-    padding-bottom: 16px;
-    .title {
-        padding: 12px 15px;
-        display: flex;
 
-        h2 {
-            flex: 1 1 auto;
-            font-size: 16px;
-            font-weight: normal;
-        }
-        .recommand-link {
-            a {
-                color: #666;
-            }
-        }
-    }
-}
 
 .nav-container {
     .nav-wrapper {

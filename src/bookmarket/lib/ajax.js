@@ -1,4 +1,4 @@
-function ajax(method, url, field, mode = true) {
+function ajax(method, url, field, body, mode = true) {
     return new Promise(resolve => {
         var xhr = new XMLHttpRequest();
 
@@ -16,15 +16,20 @@ function ajax(method, url, field, mode = true) {
         };
 
         xhr.open(method, url, mode);
-        xhr.send(null);
+        if (body) {
+            xhr.setRequestHeader('content-type', 'application/json');
+            xhr.send(body);
+        } else {
+            xhr.send(null);
+        }
     });
 };
 
 ajax.get = async function (url, field) {
     return await ajax('get', url, field);
 };
-ajax.post = async function (url) {
-    return await ajax('post', url);
+ajax.post = async function (url, body) {
+    return await ajax('post', url, '', body);
 };
 
 export default ajax;

@@ -1,6 +1,6 @@
 <template>
     <nav class="book-list">
-        <a v-for="book of bookList" :key="book.id" class="book-item">
+        <router-link v-for="book of bookList" :key="book.id" :to="`/books/${book.id}`" class="book-item">
             <figure>
                 <img :src="book.images">
             </figure>
@@ -23,7 +23,7 @@
                     <span class="book-discount">{{Math.round(book.price/book.originalPrice*10)}}折</span>
                 </div>
             </aside>
-        </a>
+        </router-link>
     </nav>
 </template>
 
@@ -60,6 +60,7 @@ export default {
                 .book-describe {
                     flex-grow: 1;
                     .book-title {
+                        color: #333;
                         font-weight: normal;
                         font-size: 16px;
                     }
@@ -111,6 +112,7 @@ export default {
                     font-size: 13px;
                 }
                 .book-price {
+                    color: #333;
                     font-size: 20px;
                     flex-grow: 1;
                 }

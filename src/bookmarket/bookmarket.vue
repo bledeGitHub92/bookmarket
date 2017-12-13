@@ -17,6 +17,7 @@ export default {
 <style lang="less">
 * {
     box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
@@ -26,7 +27,8 @@ body {
 }
 
 input,
-textarea {
+textarea,
+button:focus {
     outline: none;
 }
 
@@ -67,9 +69,10 @@ textarea:-ms-input-placeholder {
 }
 
 .book-market {
+    padding-bottom: 50px;
     max-width: 600px;
+    min-height: 100vh;
     margin: 0 auto;
-    background-color: #fff;
 }
 
 .icon {

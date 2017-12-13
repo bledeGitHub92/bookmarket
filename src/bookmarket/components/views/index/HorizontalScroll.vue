@@ -1,73 +1,84 @@
 <template>
-    <div class="horizontal-scroll">
-        <nav class="horizontal-list">
-            <a href="#" class="horizontal-item">
-                <h3 class="horizontal-item-title">啊！设计</h3>
-                <div class="horizontal-item-more">
-                    <span class="horizontal-item-number">123</span>
-                    在售
-                </div>
-            </a>
-            <a href="#" class="horizontal-item">
-                <h3 class="horizontal-item-title">啊！设计</h3>
-                <div class="horizontal-item-more">
-                    <span class="horizontal-item-number">123</span>
-                    在售
-                </div>
-            </a>
-            <a href="#" class="horizontal-item">
-                <h3 class="horizontal-item-title">啊！设计</h3>
-                <div class="horizontal-item-more">
-                    <span class="horizontal-item-number">123</span>
-                    在售
-                </div>
-            </a>
-            <a href="#" class="horizontal-item">
-                <h3 class="horizontal-item-title">啊！设计</h3>
-                <div class="horizontal-item-more">
-                    <span class="horizontal-item-number">123</span>
-                    在售
-                </div>
-            </a>
-            <a href="#" class="horizontal-item">
-                <h3 class="horizontal-item-title">啊！设计</h3>
-                <div class="horizontal-item-more">
-                    <span class="horizontal-item-number">123</span>
-                    在售
-                </div>
-            </a>
-            <a href="#" class="horizontal-item">
-                <h3 class="horizontal-item-title">啊！设计</h3>
-                <div class="horizontal-item-more">
-                    <span class="horizontal-item-number">123</span>
-                    在售
-                </div>
-            </a>
-            <a href="#" class="horizontal-item">
-                <h3 class="horizontal-item-title">啊！设计</h3>
-                <div class="horizontal-item-more">
-                    <span class="horizontal-item-number">123</span>
-                    在售
-                </div>
-            </a>
-            <a href="#" class="horizontal-item">
-                <h3 class="horizontal-item-title">全部书单</h3>
-                <div class="horizontal-item-more">
-                    <span class="horizontal-item-number">58</span>
-                    个
-                </div>
-            </a>
-        </nav>
-    </div>
+    <section class="recommand">
+        <div class="title">
+            <h2>书单推荐</h2>
+            <div class="recommand-link">
+                <a href="#">
+                    全部 {{count}} 个书单
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="icon">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="horizontal-scroll">
+            <nav class="horizontal-list">
+                <router-link v-for="item of collections" :key="item.id" :to="`/collections/${item.id}`" class="horizontal-item">
+                    <h3 class="horizontal-item-title">{{item.name}}</h3>
+                    <div class="horizontal-item-more">
+                        <span class="horizontal-item-number">{{item.bookCount}}</span>
+                        在售
+                    </div>
+                </router-link>
+                <a href="#" class="horizontal-item">
+                    <h3 class="horizontal-item-title">全部书单</h3>
+                    <div class="horizontal-item-more">
+                        <span class="horizontal-item-number">{{count}}</span>
+                        个
+                    </div>
+                </a>
+            </nav>
+        </div>
+    </section>
 </template>
 
 <script>
+import ajax from '../../../lib/ajax';
+
 export default {
-    name: 'HorizontalScroll'
+    name: 'HorizontalScroll',
+    data() {
+        return {
+            count: 0,
+            collections: [],
+        }
+    },
+    methods: {
+        // 获取推荐书单
+        getCollections() {
+            ajax.get('/api/home_collections', 'collections')
+                .then(({ count, data }) => {
+                    this.count = count;
+                    this.collections = data;
+                });
+        },
+    },
+    mounted() {
+        this.getCollections();
+    }
 }
 </script>
 
 <style lang="less" scoped>
+.recommand {
+    padding-bottom: 16px;
+    .title {
+        padding: 12px 15px;
+        display: flex;
+
+        h2 {
+            flex: 1 1 auto;
+            font-size: 16px;
+            font-weight: normal;
+        }
+        .recommand-link {
+            a {
+                color: #666;
+            }
+        }
+    }
+}
+
 .horizontal-scroll {
     height: 80px;
     overflow: hidden;
