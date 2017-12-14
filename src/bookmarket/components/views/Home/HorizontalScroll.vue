@@ -3,12 +3,12 @@
         <div class="title">
             <h2>书单推荐</h2>
             <div class="recommand-link">
-                <a href="#">
+                <router-link to="/collections">
                     全部 {{count}} 个书单
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="icon">
                         <polyline points="9 18 15 12 9 6"></polyline>
                     </svg>
-                </a>
+                </router-link>
             </div>
         </div>
         <div class="horizontal-scroll">
@@ -20,13 +20,13 @@
                         在售
                     </div>
                 </router-link>
-                <a href="#" class="horizontal-item">
+                <router-link to="/collections" class="horizontal-item">
                     <h3 class="horizontal-item-title">全部书单</h3>
                     <div class="horizontal-item-more">
                         <span class="horizontal-item-number">{{count}}</span>
                         个
                     </div>
-                </a>
+                </router-link>
             </nav>
         </div>
     </section>

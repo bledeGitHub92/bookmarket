@@ -5,82 +5,33 @@
             <div class="line"></div>
         </header>
         <div class="tags-container">
-            <router-link to="/tags/1">摄影</router-link>
-            <router-link to="/tags/2">美国纽约摄影学院摄影教材</router-link>
-            <router-link to="/tags/3">我是一只摄影狗</router-link>
-            <router-link to="/tags/4">教程</router-link>
-            <router-link to="/tags/5">艺术</router-link>
-            <router-link to="/tags/6">摄影理论</router-link>
-            <router-link to="/tags/7">艺术是个人表达</router-link>
-            <router-link to="/tags/8">豆瓣8.5分以上</router-link>
+            <router-link v-for="tag of relatedTags" :key="tag.id" :to="`/tags/${tag.id}`">{{tag.name}}</router-link>
         </div>
         <div class="books-container">
-            <router-link to="/books/123345345">
+            <router-link v-for="book of relatedBooks" :key="book.id" :to="`/books/${book.id}`">
                 <figure>
-                    <div class="cover"></div>
-                    <figcaption>非凡摄影</figcaption>
-                </figure>
-            </router-link>
-            <router-link to="/books/123345345">
-                <figure>
-                    <div class="cover"></div>
-                    <figcaption>非凡摄影</figcaption>
-                </figure>
-            </router-link>
-            <router-link to="/books/123345345">
-                <figure>
-                    <div class="cover"></div>
-                    <figcaption>非凡摄影</figcaption>
-                </figure>
-            </router-link>
-            <router-link to="/books/123345345">
-                <figure>
-                    <div class="cover"></div>
-                    <figcaption>非凡摄影</figcaption>
-                </figure>
-            </router-link>
-            <router-link to="/books/123345345">
-                <figure>
-                    <div class="cover"></div>
-                    <figcaption>非凡摄影</figcaption>
-                </figure>
-            </router-link>
-            <router-link to="/books/123345345">
-                <figure>
-                    <div class="cover"></div>
-                    <figcaption>非凡摄影</figcaption>
-                </figure>
-            </router-link>
-            <router-link to="/books/123345345">
-                <figure>
-                    <div class="cover"></div>
-                    <figcaption>非凡摄影</figcaption>
-                </figure>
-            </router-link>
-            <router-link to="/books/123345345">
-                <figure>
-                    <div class="cover"></div>
-                    <figcaption>非凡摄影</figcaption>
-                </figure>
-            </router-link>
-            <router-link to="/books/123345345">
-                <figure>
-                    <div class="cover"></div>
-                    <figcaption>非凡摄影</figcaption>
+                    <div class="cover" :style="{'background':`url(${book.images})`}"></div>
+                    <figcaption>{{book.title}}</figcaption>
                 </figure>
             </router-link>
         </div>
         <footer>
+            <div class="line"></div>
             <svg width="12" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" data-jsx="2026822261">
                 <rect x="4" y="4" width="16" height="16" data-jsx="2026822261"></rect>
             </svg>
+            <div class="line"></div>
         </footer>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'BookRelated'
+    name: 'BookRelated',
+    props: {
+        relatedTags: { type: Array, required: true },
+        relatedBooks: { type: Array, required: true },
+    }
 }
 </script>
 
@@ -121,7 +72,13 @@ export default {
         display: flex;
         flex-wrap: wrap;
         a {
-            width: calc(~"(100vw - 80px) / 3");
+            width: calc(~"(100% - 60px) / 3");
+            @media (max-width: 360px) {
+                width: calc(~"(100% - 40px) / 2");
+            }
+            @media (min-width: 480px) {
+                width: calc(~"(100% - 80px) / 4");
+            }
             color: #333;
             margin: 10px;
             font-size: 13px;
@@ -130,6 +87,15 @@ export default {
                 flex-direction: column;
                 .cover {
                     height: calc(~"(100vw - 80px) / 3 * 1.42");
+                    @media (max-width: 360px) {
+                        height: calc(~"(100vw - 60px) / 2 * 1.42");
+                    }
+                    @media (min-width: 480px) {
+                        height: calc(~"(100vw - 100px) / 4 * 1.42");
+                    }
+                    @media (min-width: 600px) {
+                        height: calc(~"(600px - 100px) / 4 * 1.42");
+                    }
                     background-color: pink;
                     flex-grow: 1;
                     background-position: center;
@@ -148,9 +114,14 @@ export default {
     footer {
         display: flex;
         justify-content: center;
-        align-items: flex-start;
+        align-items: center;
         padding-top: 30px;
+        .line {
+            flex-basis: 42px;
+            border-top: 1px solid #e5e5e5;
+        }
         svg {
+            margin: 0 9px;
             color: #e5e5e5;
             transform: rotate(45deg);
         }

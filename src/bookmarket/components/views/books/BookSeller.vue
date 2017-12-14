@@ -1,12 +1,11 @@
 <template>
-    <router-link to="/books/1312321321234/users?type=seller">
+    <router-link :to="`/books/${id}/users?type=seller`">
         <div class="avatars">
-            <span class="avatar"><img width="28" height="28" src="https://img.xjh.me/random_img.php?type=bg&ctype=acg&return=302"></span>
-            <span class="avatar"><img width="28" height="28" src="https://img.xjh.me/random_img.php?type=bg&ctype=acg&return=302"></span>
-            <span class="avatar"><img width="28" height="28" src="https://img.xjh.me/random_img.php?type=bg&ctype=acg&return=302"></span>
+            <span v-for="seller of latestSellers" :key="seller.name" class="avatar"><img width="28" height="28" :src="seller.avatar"></span>
         </div>
         <div class="content">
-            笑傲江湖卖过这本书
+            {{seller}}
+            <span v-show="sellerCount>1">等 {{sellerCount}} 人</span>卖过这本书
         </div>
         <svg viewBox="0 0 24 24" fill="none" stroke="rgb(210, 210, 210)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="icon">
             <polyline points="9 18 15 12 9 6"></polyline>
@@ -16,7 +15,17 @@
 
 <script>
 export default {
-    name: 'BookSeller'
+    name: 'BookSeller',
+    props: {
+        id: { type: String, required: true },
+        sellerCount: { type: Number, required: true },
+        latestSellers: { type: Array, required: true }
+    },
+    computed: {
+        seller() {
+            return this.latestSellers[0] ? this.latestSellers[0].name : '';
+        }
+    }
 }
 </script>
 

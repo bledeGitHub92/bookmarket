@@ -11,11 +11,11 @@
                         <div class="book-author">{{book.author}}</div>
                         <div class="book-rating">豆瓣评分 {{book.rating}}</div>
                     </div>
-                    <div class="book-seller">
+                    <router-link :to="`/users/${book.latestSellers[0].id}`" class="book-seller">
                         <figure>
-                            <img src="" alt="">
+                            <img :src="book.latestSellers[0].avatar">
                         </figure>
-                    </div>
+                    </router-link>
                 </div>
                 <div class="book-price-area">
                     <span class="price-type">二手价</span>
@@ -35,12 +35,30 @@ export default {
             type: Array,
             required: true
         }
+    },
+    methods: {
+        getBooks() {
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop,
+                viewportHeight = document.documentElement.clientHeight,
+                browserHeight = document.documentElement.scrollHeight;
+
+            if ((browserHeight - viewportHeight - scrollTop) <= 120) {
+                this.$emit('getBooks', true)
+            }
+        }
+    },
+    mounted() {
+        document.addEventListener('scroll', this.getBooks, false);
+    },
+    beforeDestroy() {
+        document.removeEventListener('scroll', this.getBooks, false);
     }
 }
 </script>
 
 <style lang="less" scoped>
 .book-list {
+    background-color: #fff;
     .book-item {
         display: flex;
         padding: 25px 15px;

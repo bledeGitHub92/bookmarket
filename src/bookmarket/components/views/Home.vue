@@ -1,5 +1,5 @@
 <template>
-    <div class="index">
+    <div class="home">
         <!-- 搜索框  -->
         <section class="search-bar">
             <input type="text" placeholder="搜索">
@@ -21,16 +21,16 @@
             <div :style="{height:navHolderHeight?navHolderHeight+'px':'auto'}" v-show="navFixed" class="nav-holder"></div>
         </div>
         <!-- 书籍列表  -->
-        <book-list :book-list="bookList"></book-list>
+        <book-list :book-list="bookList" @getBooks="getBooks"></book-list>
     </div>
 </template>
 
 <script>
 import ajax from '../../lib/ajax';
-import HorizontalScroll from './index/HorizontalScroll.vue';
-import NavPrimary from './index/NavPrimary.vue';
-import NavSecondary from './index/NavSecondary.vue';
-import BookList from './index/BookList.vue';
+import HorizontalScroll from './Home/HorizontalScroll.vue';
+import NavPrimary from './Home/NavPrimary.vue';
+import NavSecondary from './Home/NavSecondary.vue';
+import BookList from '../commons/BookList.vue';
 
 export default {
     name: 'IndexView',
@@ -142,10 +142,8 @@ export default {
                     }
                 });
         },
-        scrollListener() {
+        fixNav() {
             var scrollTop = document.documentElement.scrollTop || document.body.scrollTop,
-                viewportHeight = document.documentElement.clientHeight,
-                browserHeight = document.documentElement.scrollHeight,
                 refElem = this.$refs['nav-container'],
                 refTop = refElem.offsetTop,
                 refHeight = refElem.offsetHeight;
@@ -157,19 +155,14 @@ export default {
             } else if (this.navFixed && scrollTop < refTop) {
                 this.navFixed = false;
             }
-            // 滑倒底部获取数据
-            if (viewportHeight + scrollTop === browserHeight) {
-                console.log('loaded');
-                this.getBooks(true);
-            }
         }
     },
     mounted() {
         this.initLinkActive();
-        document.addEventListener('scroll', this.scrollListener);
+        document.addEventListener('scroll', this.fixNav, false);
     },
     beforeDestroy() {
-        document.removeEventListener('scroll', this.scrollListener);
+        document.removeEventListener('scroll', this.fixNav, false);
     },
     beforeRouteEnter(to, from, next) {
         next(vm => vm.getBooks());
@@ -182,8 +175,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.index {
+.home {
     background-color: #fff;
+    min-height: 100vh;
 }
 
 .search-bar {

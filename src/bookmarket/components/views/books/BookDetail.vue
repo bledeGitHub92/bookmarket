@@ -2,24 +2,31 @@
     <div class="book-detail">
         <div class="description">
             <div class="author">
-                <router-link to="/search/阿梅里·挪动">[英]阿梅里·挪动</router-link>
+                <router-link :to="`/search/${author}`">{{author}}</router-link>
             </div>
             <div class="brief">
-                <span class="press">上海译文出版社</span>
-                <span class="date">2010-4</span>
-                <span class="type">平装</span>
+                <span class="press">{{publisher}}</span>
+                <span class="date">{{publishDate}}</span>
+                <span class="type">{{bingding}}</span>
             </div>
         </div>
         <a class="rating" href="#">
             <div class="media">豆瓣</div>
-            <div class="score">7.2</div>
+            <div class="score">{{rating}}</div>
         </a>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'BookDetail'
+    name: 'BookDetail',
+    props: {
+        author: { type: String, required: true },
+        publisher: { type: String, required: true },
+        publishDate: { type: String, required: true },
+        bingding: { type: String, required: true },
+        rating: { type: Number, required: true },
+    }
 }
 </script>
 

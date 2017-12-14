@@ -1,15 +1,19 @@
 <template>
     <div class="book-price">
         <span class="type">二手价</span>
-        <span class="price">￥34.00</span>
-        <span class="discount">5折</span>
-        <span class="original">￥68.00</span>
+        <span class="price">￥{{price/100}}</span>
+        <span class="discount">{{Math.round(price/originalPrice*10)}}折</span>
+        <span class="original">￥{{originalPrice/100}}</span>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'BookPrice'
+    name: 'BookPrice',
+    props: {
+        price: { type: Number, required: true },
+        originalPrice: { type: Number, required: true },
+    },
 }
 </script>
 
