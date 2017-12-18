@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+
 import Home from '../components/views/Home.vue';
 import Books from '../components/views/Books.vue';
 import CollectionMenu from '../components/views/CollectionMenu.vue';
@@ -16,7 +17,7 @@ const routes = [{
     components: {
         default: Home,
         ViewNav
-    }
+    },
 }, {
     path: '/categories/:id',
     components: {
@@ -64,7 +65,14 @@ const routes = [{
 
 const router = new VueRouter({
     mode: 'history',
-    routes
+    scrollBehavior(to, from, savedPosition) {
+        if (to.path.includes('/categories') || from.path.includes('/categories')) {
+            return false;
+        } else {
+            return savedPosition || { x: 0, y: 0 };
+        }
+    },
+    routes,
 });
 
 export default router;

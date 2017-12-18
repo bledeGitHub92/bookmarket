@@ -1,9 +1,9 @@
 <template>
     <nav class="nav-primary">
-        <router-link @click.native="$emit('changeNav', '')" :class="[{'router-link-active':linkActive===''},'nav-item']" to="/" exact>
+        <router-link class="nav-item" to="/" exact>
             <span class="nav-text">新上架</span>
         </router-link>
-        <router-link @click.native="$emit('changeNav', nav.id)" v-for="nav of navList" :class="[{'router-link-active':linkActive===nav.id},'nav-item']" :key="nav.id" :to="`/categories/${nav.id}`">
+        <router-link v-for="nav of navList" :class="[{'router-link-active':linkActive===nav.id},'nav-item']" :key="nav.id" :to="`/categories/${nav.id}`">
             <span class="nav-text ">{{nav.name}}</span>
         </router-link>
     </nav>

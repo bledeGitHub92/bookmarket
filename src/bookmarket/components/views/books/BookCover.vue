@@ -1,6 +1,6 @@
 <template>
     <div class="cover">
-        <div class="background" :style="{backgroundImage:`url(${images})`}"></div>
+        <div class="background" :style="{'backgroundImage':`url(${images})`}"></div>
         <figure>
             <img :src="images">
         </figure>

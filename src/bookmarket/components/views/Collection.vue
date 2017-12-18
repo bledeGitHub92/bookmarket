@@ -1,7 +1,7 @@
 <template>
     <div class="collection">
         <collection-cover></collection-cover>
-        <book-list :book-list="bookList" @getBooks="getBooks"></book-list>
+        <book-list v-bind="bookData" @getBooks="getBooks"></book-list>
     </div>
 </template>
 
@@ -15,21 +15,30 @@ export default {
     components: {
         CollectionCover, BookList
     },
-    props: ['id'],
+    props: {
+        id: String
+    },
     data() {
         return {
-            bookList: []
+            start: 0,
+            bookData: {
+                scrollSwitch: true,
+                bookList: []
+            }
         }
     },
     methods: {
         // 获取书单
         getBooks(isAdd) {
             ajax.get(`/api/collections/${this.id}/books`, 'books')
-                .then(res => {
+                .then(({ books, start, count, total }) => {
                     if (isAdd) {
-                        this.bookList.push(...res);
+                        this.bookData.bookList.push(...books);
                     } else {
-                        this.bookList = res
+                        this.bookData.bookList = books
+                    }
+                    if (start >= total) {
+                        this.bookData.scrollSwitch = false;
                     }
                 });
         },
@@ -45,4 +54,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.collection {
+    background-color: #fff;
+}
 </style>

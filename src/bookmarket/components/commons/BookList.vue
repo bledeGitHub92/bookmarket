@@ -1,36 +1,48 @@
 <template>
-    <nav class="book-list">
-        <router-link v-for="book of bookList" :key="book.id" :to="`/books/${book.id}`" class="book-item">
-            <figure>
-                <img :src="book.images">
-            </figure>
-            <aside>
-                <div class="book-info">
-                    <div class="book-describe">
-                        <h3 class="book-title">{{book.title}}</h3>
-                        <div class="book-author">{{book.author}}</div>
-                        <div class="book-rating">豆瓣评分 {{book.rating}}</div>
+    <div class="book-list-wrapper">
+        <nav class="book-list">
+            <router-link v-for="book of bookList" :key="book.id" :to="`/books/${book.id}`" class="book-item">
+                <figure>
+                    <img :src="book.images">
+                </figure>
+                <aside>
+                    <div class="book-info">
+                        <div class="book-describe">
+                            <h3 class="book-title">{{book.title}}</h3>
+                            <div class="book-author">{{book.author}}</div>
+                            <div class="book-rating">豆瓣评分 {{book.rating}}</div>
+                        </div>
+                        <router-link :to="`/users/${book.latestSellers[0].id}`" class="book-seller">
+                            <figure>
+                                <img :src="book.latestSellers[0].avatar">
+                            </figure>
+                        </router-link>
                     </div>
-                    <router-link :to="`/users/${book.latestSellers[0].id}`" class="book-seller">
-                        <figure>
-                            <img :src="book.latestSellers[0].avatar">
-                        </figure>
-                    </router-link>
-                </div>
-                <div class="book-price-area">
-                    <span class="price-type">二手价</span>
-                    <span class="book-price">￥{{book.price}}</span>
-                    <span class="book-discount">{{Math.round(book.price/book.originalPrice*10)}}折</span>
-                </div>
-            </aside>
-        </router-link>
-    </nav>
+                    <div class="book-price-area">
+                        <span class="price-type">二手价</span>
+                        <span class="book-price">￥{{book.price}}</span>
+                        <span class="book-discount">{{Math.round(book.price/book.originalPrice*10)}}折</span>
+                    </div>
+                </aside>
+            </router-link>
+        </nav>
+        <end-symbol v-if="!scrollSwitch"></end-symbol>
+    </div>
 </template>
 
 <script>
+import EndSymbol from './EndSymbol.vue';
+
 export default {
     name: 'BookList',
+    components: {
+        EndSymbol
+    },
     props: {
+        scrollSwitch: {
+            type: Boolean,
+            required: true
+        },
         bookList: {
             type: Array,
             required: true
@@ -38,12 +50,14 @@ export default {
     },
     methods: {
         getBooks() {
-            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop,
-                viewportHeight = document.documentElement.clientHeight,
-                browserHeight = document.documentElement.scrollHeight;
+            if (this.scrollSwitch) {
+                var scrollTop = document.documentElement.scrollTop || document.body.scrollTop,
+                    viewportHeight = document.documentElement.clientHeight,
+                    browserHeight = document.documentElement.scrollHeight;
 
-            if ((browserHeight - viewportHeight - scrollTop) <= 120) {
-                this.$emit('getBooks', true)
+                if ((browserHeight - viewportHeight - scrollTop) <= 120) {
+                    this.$emit('getBooks', true)
+                }
             }
         }
     },
@@ -63,7 +77,10 @@ export default {
         display: flex;
         padding: 25px 15px;
         border-bottom: 1px solid #f2f2f2;
-        height: 178px;
+        &:last-child {
+            padding-bottom: 0;
+            border: none;
+        }
         figure {
             flex: 0 1 90px;
         }

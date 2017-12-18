@@ -1,16 +1,16 @@
 <template>
-    <div class="date-sold">
+    <div class="sold-log">
         <date-line :date="date" :sold-count="soldCount"></date-line>
-        <book-stack></book-stack>
+        <book-stack :books="books"></book-stack>
     </div>
 </template>
 
 <script>
 import DateLine from './DateLine.vue';
-import BookStack from './BookStack.vue';
+import BookStack from '../commons/BookStack.vue';
 
 export default {
-    name: 'DateSold',
+    name: 'SoldLog',
     components: {
         DateLine, BookStack
     },
@@ -18,6 +18,7 @@ export default {
         soldLog: { type: Object, required: true }
     },
     computed: {
+        // date-line
         date() {
             var date = new Date(this.soldLog.created);
             return {
@@ -28,13 +29,17 @@ export default {
         },
         soldCount() {
             return this.soldLog.soldCount;
+        },
+        // book-stack
+        books() {
+            return this.soldLog.userBooks;
         }
-    }
+    },
 }
 </script>
 
 <style lang="less" scoped>
-.date-sold {
+.sold-log {
     margin-bottom: 10px;
 }
 </style>
