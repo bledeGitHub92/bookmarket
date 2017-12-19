@@ -1,6 +1,6 @@
 <template>
     <section class="search-bar">
-        <input type="text" placeholder="搜索">
+        <input @focus="toSearch" type="text" placeholder="搜索" readonly>
         <span class="search-icon">
             <svg width="1.4em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" class="icon">
                 <circle cx="10.5" cy="10.5" r="7.5"></circle>
@@ -12,7 +12,12 @@
 
 <script>
 export default {
-    name: 'SearchBar'
+    name: 'SearchBar',
+    methods: {
+        toSearch() {
+            this.$router.push('/search');
+        }
+    },
 }
 </script>
 

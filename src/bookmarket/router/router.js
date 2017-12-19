@@ -8,6 +8,11 @@ import Collection from '../components/views/Collection.vue';
 import Users from '../components/views/Users.vue';
 import OwningShelf from '../components/views/Users/OwningShelf.vue';
 import SoldShelf from '../components/views/Users/SoldShelf.vue';
+import Tags from '../components/views/Tags.vue';
+import Sellers from '../components/views/Sellers.vue';
+import Search from '../components/views/Search.vue';
+import SearchHint from '../components/views/Search/router/SearchHint.vue';
+import SearchResult from '../components/views/Search/router/SearchResult.vue';
 import ViewNav from '../components/commons/ViewNav.vue';
 
 Vue.use(VueRouter);
@@ -61,7 +66,32 @@ const routes = [{
         ViewNav
     },
     props: { default: true }
-},]
+}, {
+    path: '/tags/:id',
+    components: {
+        default: Tags,
+        ViewNav
+    },
+    props: { default: true }
+}, {
+    path: '/books/:id/users',
+    components: {
+        default: Sellers,
+        ViewNav
+    },
+    props: { default: true }
+}, {
+    path: '/search',
+    component: Search,
+    children: [{
+        path: '',
+        component: SearchHint
+    }, {
+        path: ':keyword',
+        component: SearchResult,
+        props: true
+    }]
+}]
 
 const router = new VueRouter({
     mode: 'history',

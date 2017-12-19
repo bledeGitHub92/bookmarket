@@ -205,4 +205,75 @@ router.get('/api/users/:id/owning-books', (req, res) => {
     }));
 });
 
+router.get('/api/tags/:id', (req, res) => {
+    res.send(mock({
+        tag: {
+            id: Random.id(),
+            'bookCount|0-99': 0,
+            name: Random.ctitle()
+        }
+    }))
+});
+
+router.get('/api/tags/:id/books', (req, res) => {
+    res.send(generalBooks())
+});
+
+router.get('/api/books/:id/sellers', (req, res) => {
+    res.send(mock({
+        sellers: {
+            'count': 20,
+            'start|0-99': 0,
+            'total|0-99': 0,
+            'sellers|1-6': [
+                {
+                    'id|+1': [Random.id(), Random.id(), Random.id(), Random.id(), Random.id(), Random.id()],
+                    'name|+1': [Random.cname(), Random.cname(), Random.cname(), Random.cname(), Random.cname(), Random.cname(),],
+                    'soldBookCount|0-99': 0,
+                    'avatar|+1': [Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar'),]
+                }
+            ]
+        }
+    }));
+});
+
+router.get('/api/search/recommendations', (req, res) => {
+    res.send(mock({
+        labels: ["电影", "爱情", "漫画", "料理", "编程", "猫", "产品", "安妮宝贝", "明朝", "创业"]
+    }))
+});
+
+router.get('/api/search', (req, res) => {
+    res.send(mock({
+        result: [
+            { type: 'tag', tag: { id: Random.id(), name: Random.ctitle(2), 'bookCount|0-999': 0 } },
+            { id: Random.id(), title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: true, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: true, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: true, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: true, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: true, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: true, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: true, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: true, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: true, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: true, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: true, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: true, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: true, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: true, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: true, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+
+            { id: Random.id(), 'receivedCount|0-999': 0, 'wishCount|0-999': 0, title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: false, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), 'receivedCount|0-999': 0, 'wishCount|0-999': 0, title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: false, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), 'receivedCount|0-999': 0, 'wishCount|0-999': 0, title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: false, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), 'receivedCount|0-999': 0, 'wishCount|0-999': 0, title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: false, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), 'receivedCount|0-999': 0, 'wishCount|0-999': 0, title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: false, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), 'receivedCount|0-999': 0, 'wishCount|0-999': 0, title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: false, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), 'receivedCount|0-999': 0, 'wishCount|0-999': 0, title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: false, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), 'receivedCount|0-999': 0, 'wishCount|0-999': 0, title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: false, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+            { id: Random.id(), 'receivedCount|0-999': 0, 'wishCount|0-999': 0, title: Random.ctitle(), author: Random.cname(), 'price|100-9999': 0, stock: false, image: Random.image('50x70', '#643a48', '#ffffff', '皇帝的新衣') },
+        ]
+    }));
+});
+
 module.exports = router;

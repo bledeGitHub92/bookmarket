@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="`/books/${id}/users?type=seller`">
+    <router-link :to="`/books/${id}/users?type=sellers`">
         <div class="avatars">
             <span v-for="seller of latestSellers" :key="seller.name" class="avatar"><img width="28" height="28" :src="seller.avatar"></span>
         </div>

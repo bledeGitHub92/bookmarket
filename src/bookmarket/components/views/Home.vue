@@ -53,7 +53,6 @@ export default {
                         this.bookData.bookList = books
                     }
                     this.start = start + count;
-                    console.log(start, total);
                     if (start >= total) {
                         this.bookData.scrollSwitch = false;
                     }
