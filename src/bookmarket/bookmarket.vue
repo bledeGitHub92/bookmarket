@@ -69,9 +69,7 @@ textarea:-ms-input-placeholder {
 }
 
 .book-market {
-    padding-bottom: 50px;
     max-width: 600px;
-    min-height: 100vh;
     margin: 0 auto;
 }
 

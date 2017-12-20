@@ -74,6 +74,7 @@ const routes = [{
     },
     props: { default: true }
 }, {
+    name: 'sellerView',
     path: '/books/:id/users',
     components: {
         default: Sellers,

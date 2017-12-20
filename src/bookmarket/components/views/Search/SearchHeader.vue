@@ -1,7 +1,7 @@
 <template>
     <div class="search-header">
         <form name="search-form">
-            <input @keyup="search" ref="keyword" name="keyword" type="search" placeholder="书名 / 作者 / 标签">
+            <input @keyup="search" ref="keyword" name="keyword" type="search" placeholder="书名 / 作者 / 标签" :value="keyword">
         </form>
     </div>
 </template>
@@ -9,9 +9,12 @@
 <script>
 export default {
     name: 'SearchHeader',
+    props: {
+        keyword: String
+    },
     data() {
         return {
-            keydownTimer: 0
+            keydownTimer: 0,
         }
     },
     methods: {
@@ -26,7 +29,7 @@ export default {
     },
     mounted() {
         this.$refs.keyword.focus();
-    }
+    },
 }
 </script>
 

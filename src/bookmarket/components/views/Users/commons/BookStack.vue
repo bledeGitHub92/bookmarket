@@ -32,6 +32,12 @@ export default {
         position: relative;
         text-align: center;
         width: calc(~"(100% - (10px * 6)) / 3");
+        @media (min-width: 480px) {
+            width: calc(~"(100% - (10px * 8)) / 4");
+        }
+        @media (max-width: 360px) {
+            width: calc(~"(100% - (10px * 4)) / 2");
+        }
         display: inline-block;
         vertical-align: top;
         margin: 10px;
@@ -39,6 +45,15 @@ export default {
             color: #333;
             .bg-wrapper {
                 height: calc(~"(100vw - (10px * 8)) / 3 * 1.42");
+                @media (min-width: 480px) {
+                    height: calc(~"(100vw - (10px * 10)) / 4 * 1.42");
+                }
+                @media (min-width:600px) {
+                    height: calc(~"(600px - (10px * 10)) / 4 * 1.42");
+                }
+                @media (max-width: 360px) {
+                    height: calc(~"(100vw - (10px * 6)) / 2 * 1.42")
+                }
                 box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
                 .cover {
                     width: 100%;

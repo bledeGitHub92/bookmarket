@@ -5,7 +5,7 @@
         <!-- 书单推荐  -->
         <horizontal-scroll></horizontal-scroll>
         <!-- 导航条容器  -->
-        <fixed-nav></fixed-nav>
+        <fixed-nav ref="fixed-nav"></fixed-nav>
         <!-- 书籍列表  -->
         <book-list v-bind="bookData" @getBooks="getBooks"></book-list>
     </div>
@@ -81,5 +81,6 @@ export default {
 .home {
     background-color: #fff;
     min-height: 100vh;
+    padding-bottom: 50px;
 }
 </style>

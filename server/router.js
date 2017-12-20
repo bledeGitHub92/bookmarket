@@ -1,6 +1,51 @@
 var router = require('express').Router();
 var { mock, Random } = require('mockjs');
 
+router.get('/api/categories', (req, res) => {
+    var mainIds = [Random.id(), Random.id(), Random.id(), Random.id()];
+    res.send(mock({
+        categories: [{
+            id: mainIds[0],
+            name: '文化',
+            subCategories: [
+                { id: mainIds[0], name: '文学' },
+                { id: Random.id(), name: '社科' },
+                { id: Random.id(), name: '艺术' },
+                { id: Random.id(), name: '心理' },
+            ]
+        }, {
+            id: mainIds[1],
+            name: '工作',
+            subCategories: [
+                { id: mainIds[1], name: '商业' },
+                { id: Random.id(), name: '管理' },
+                { id: Random.id(), name: '技能' },
+                { id: Random.id(), name: '编程' },
+                { id: Random.id(), name: '金融' },
+            ]
+        }, {
+            id: mainIds[2],
+            name: '生活',
+            subCategories: [
+                { id: mainIds[2], name: '旅行' },
+                { id: Random.id(), name: '居家' },
+                { id: Random.id(), name: '美食' },
+                { id: Random.id(), name: '健美' },
+                { id: Random.id(), name: '育儿' },
+            ]
+        }, {
+            id: mainIds[3],
+            name: '外文',
+            subCategories: [
+                { id: mainIds[3], name: '英语' },
+                { id: Random.id(), name: '日语' },
+                { id: Random.id(), name: '繁体中文' },
+                { id: Random.id(), name: '语言学习' },
+            ]
+        },]
+    }));
+});
+
 function generalBooks() {
     var title = [Random.cword(3, 5), Random.cword(3, 5), Random.cword(3, 5), Random.cword(3, 5), Random.cword(3, 5), Random.cword(3, 5), Random.cword(3, 5), Random.cword(3, 5),];
     var bookList = mock({
@@ -22,6 +67,7 @@ function generalBooks() {
     });
     return bookList;
 }
+
 router.get('/api/categories/:id/books', (req, res) => {
     res.send(generalBooks());
 });

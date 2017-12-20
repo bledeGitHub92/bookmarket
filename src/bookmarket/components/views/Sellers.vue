@@ -80,6 +80,7 @@ export default {
 <style lang="less" scoped>
 .sellers-wrapper {
     min-height: 100vh;
+    padding-bottom: 50px;
     background-color: #fff;
     .seller {
         padding: 15px;

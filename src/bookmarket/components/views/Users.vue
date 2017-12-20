@@ -69,7 +69,7 @@ export default {
         }
     },
     methods: {
-        getUserInfo() {
+        getUserInfo(isFromSeller) {
             ajax.get(`/api/users/${this.id}`, 'user')
                 .then(res => {
                     var nextPath = '';
@@ -80,7 +80,7 @@ export default {
                     this.owningBookCount = res.owningBookCount;
                     this.soldBookCount = res.soldBookCount;
                     this.backgroundImages = res.backgroundImages;
-                    if (res.owningBookCount) {
+                    if (res.owningBookCount && !isFromSeller) {
                         nextPath = 'owning-bookshelf';
                     } else {
                         nextPath = 'sold-bookshelf';
@@ -90,13 +90,14 @@ export default {
         }
     },
     beforeRouteEnter(to, from, next) {
-        next(vm => vm.getUserInfo());
+        next(vm => vm.getUserInfo(from.name === 'sellerView'));
     },
 }
 </script>
 
 <style lang="less" scoped>
 .users {
+    padding-bottom: 50px;
     min-height: 100vh;
     background-color: #fff;
     header {

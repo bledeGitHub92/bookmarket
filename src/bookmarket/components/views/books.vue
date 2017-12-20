@@ -35,7 +35,7 @@ import BookBrief from './Books/BookBrief.vue';
 import BookRelated from './Books/BookRelated.vue';
 
 export default {
-    name: 'BooksView',
+    name: 'BookView',
     components: {
         BookCover, BookSeller, BookDetail,
         BookPrice, BookBuy, BookBrief,

@@ -1,6 +1,6 @@
 <template>
     <div class="search">
-        <search-header></search-header>
+        <search-header :keyword="keyword"></search-header>
         <router-view></router-view>
     </div>
 </template>
@@ -13,6 +13,18 @@ export default {
     components: {
         SearchHeader
     },
+    data() {
+        return {
+            keyword: ''
+        }
+    },
+    beforeRouteEnter(to, from, next) {
+        next(vm => vm.keyword = to.params.keyword);
+    },
+    beforeRouteUpdate(to, from, next) {
+        this.keyword = to.params.keyword;
+        next()
+    }
 }
 </script>
 

@@ -47,7 +47,7 @@ export default {
 <style lang="less" scoped>
 .collection-menu {
     padding: 14px;
-    padding-bottom: 0;
+    padding-bottom: 50px;
     .collection {
         border-radius: 5px;
         margin-top: 14px;

@@ -55,6 +55,8 @@ export default {
 
 <style lang="less" scoped>
 .collection {
+    min-height: 100vh;
+    padding-bottom: 50px;
     background-color: #fff;
 }
 </style>

@@ -83,6 +83,10 @@ export default {
         }
         figure {
             flex: 0 1 90px;
+            height: 128px;
+            img {
+                vertical-align: top;
+            }
         }
         aside {
             margin-left: 12px;

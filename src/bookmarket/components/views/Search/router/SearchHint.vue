@@ -1,7 +1,7 @@
 <template>
     <div class="search-hint">
         <h2>你可以试试搜</h2>
-        <div class="search-labels">
+        <div @click="searchByHint" class="search-labels">
             <span v-for="label of labels" :key="label" class="label">{{label}}</span>
         </div>
     </div>
@@ -23,6 +23,12 @@ export default {
                 .then(res => {
                     this.labels = res;
                 });
+        },
+        searchByHint({ target }) {
+            if (target.nodeName.toLowerCase() === 'span') {
+                var text = target.textContent.trim();
+                this.$router.push(`/search/${text}`);
+            }
         }
     },
     beforeRouteEnter(to, from, next) {
