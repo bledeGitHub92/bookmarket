@@ -1,7 +1,7 @@
 <template>
     <div class="book-list-wrapper">
         <nav class="book-list">
-            <router-link v-for="book of bookList" :key="book.id" :to="`/books/${book.id}`" class="book-item">
+            <router-link v-for="book of dataList" :key="book.id" :to="`/books/${book.id}`" class="book-item">
                 <figure>
                     <img :src="book.images">
                 </figure>
@@ -9,14 +9,16 @@
                     <div class="book-info">
                         <div class="book-describe">
                             <h3 class="book-title">{{book.title}}</h3>
-                            <div class="book-author">{{book.author}}</div>
+                            <div class="book-author">
+                                <span v-for="author of book.author" :key="author">{{author}}</span>
+                            </div>
                             <div class="book-rating">豆瓣评分 {{book.rating}}</div>
                         </div>
-                        <router-link :to="`/users/${book.latestSellers[0].id}`" class="book-seller">
-                            <figure>
-                                <img :src="book.latestSellers[0].avatar">
-                            </figure>
-                        </router-link>
+                         <router-link :to="`/users/${book.latestSellers[0].id}`" class="book-seller">
+                                <figure>
+                                    <img :src="book.latestSellers[0].avatar">
+                                </figure>
+                            </router-link> 
                     </div>
                     <div class="book-price-area">
                         <span class="price-type">二手价</span>
@@ -26,47 +28,18 @@
                 </aside>
             </router-link>
         </nav>
-        <end-symbol v-if="!scrollSwitch"></end-symbol>
     </div>
 </template>
 
 <script>
-import EndSymbol from './EndSymbol.vue';
-
 export default {
     name: 'BookList',
-    components: {
-        EndSymbol
-    },
     props: {
-        scrollSwitch: {
-            type: Boolean,
-            required: true
-        },
-        bookList: {
+        dataList: {
             type: Array,
             required: true
         }
     },
-    methods: {
-        getBooks() {
-            if (this.scrollSwitch) {
-                var scrollTop = document.documentElement.scrollTop || document.body.scrollTop,
-                    viewportHeight = document.documentElement.clientHeight,
-                    browserHeight = document.documentElement.scrollHeight;
-
-                if ((browserHeight - viewportHeight - scrollTop) <= 120) {
-                    this.$emit('getBooks', true)
-                }
-            }
-        }
-    },
-    mounted() {
-        document.addEventListener('scroll', this.getBooks, false);
-    },
-    beforeDestroy() {
-        document.removeEventListener('scroll', this.getBooks, false);
-    }
 }
 </script>
 
@@ -107,6 +80,9 @@ export default {
                         color: #aaa;
                         font-size: 12px;
                         margin-top: 4px;
+                        span {
+                            margin-right: 4px;
+                        }
                     }
                     .book-rating {
                         color: #d6ba8c;

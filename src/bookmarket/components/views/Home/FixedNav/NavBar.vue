@@ -37,7 +37,7 @@ export default {
         },
         // 子组件 nav-secondary 的显隐
         secondaryListState() {
-            return this.secondaryList.length > 0;
+            return this.secondaryList && this.secondaryList.length > 0;
         }
     },
     methods: {

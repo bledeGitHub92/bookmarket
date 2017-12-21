@@ -113,12 +113,10 @@ export default {
         },
     },
     beforeRouteEnter(to, from, next) {
-        console.log('beforeRouteEnter');
         next(vm => vm.getBookDetail());
     },
     beforeRouteUpdate(to, from, next) {
         this.getBookDetail();
-        console.log('beforeRouteUpdate');
         next();
     }
 }

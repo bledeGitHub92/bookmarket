@@ -20,7 +20,20 @@ module.exports = merge(base, {
         new webpack.HotModuleReplacementPlugin()
     ],
     module: {
-        rules: [
-        ]
+        rules: [{
+            test: /\.vue$/,
+            include: path.resolve(__dirname, '../src'),
+            use: [{
+                loader: 'vue-loader',
+                options: {
+                    loaders: {
+                        less: ['vue-style-loader', 'css-loader', 'postcss-loader', 'less-loader']
+                    },
+                }
+            }]
+        }, {
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader']
+        }]
     },
 });

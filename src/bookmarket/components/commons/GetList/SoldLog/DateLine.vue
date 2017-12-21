@@ -12,11 +12,16 @@
 <script>
 export default {
     name: 'DateLine',
-    props: {
-        date: { type: Object, required: true },
-        soldCount: { type: Number, required: true }
-    },
+    props: ['created', 'soldCount'],
     computed: {
+        date() {
+            var date = new Date(this.created);
+            return {
+                year: date.getFullYear(),
+                month: date.getMonth() + 1,
+                day: date.getDay()
+            }
+        },
         isThisYear() {
             return new Date().getFullYear() > this.year;
         },

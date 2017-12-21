@@ -31,7 +31,9 @@
                 </div>
             </div>
         </header>
-        <router-view></router-view>
+        <div class="user-books-content">
+            <router-view></router-view>
+        </div>
     </div>
 </template>
 
@@ -97,6 +99,9 @@ export default {
 
 <style lang="less" scoped>
 .users {
+    .user-books-content {
+        padding: 10px;
+    }
     padding-bottom: 50px;
     min-height: 100vh;
     background-color: #fff;

@@ -45,6 +45,11 @@ export default {
     methods: {
         // 获取分类
         getCategories() {
+            // ajax.get('http://10.10.101.206:8181/v1/shelves')
+            //     .then(res => {
+            //         res = JSON.parse(res);
+            //         this.categories = res.result;
+            //     });
             ajax.get('/api/categories', 'categories')
                 .then(res => {
                     this.categories = res;

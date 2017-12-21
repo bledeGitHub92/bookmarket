@@ -51,6 +51,12 @@ export default {
                     this.count = count;
                     this.collections = data;
                 });
+            // ajax.get('http://10.10.101.206:8181/v1/categories')
+            //     .then(res => {
+            //         res = JSON.parse(res);
+            //         this.count = res.count;
+            //         this.collections = res.result;
+            //     });
         },
     },
     mounted() {

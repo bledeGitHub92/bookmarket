@@ -1,6 +1,6 @@
 <template>
     <div class="book-stack">
-        <div v-for="book of books" :key="book.id" class="book">
+        <div v-for="book of dataList" :key="book.id" class="book">
             <router-link :to="`/books/${book.id}`">
                 <div class="bg-wrapper">
                     <div class="cover" :style="{'backgroundImage':`url(${book.image})`}"></div>
@@ -19,7 +19,7 @@
 export default {
     name: 'BookStack',
     props: {
-        books: { type: Array, required: true }
+        dataList: { type: Array, required: true }
     },
 }
 </script>

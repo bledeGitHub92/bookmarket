@@ -49,21 +49,19 @@ router.get('/api/categories', (req, res) => {
 function generalBooks() {
     var title = [Random.cword(3, 5), Random.cword(3, 5), Random.cword(3, 5), Random.cword(3, 5), Random.cword(3, 5), Random.cword(3, 5), Random.cword(3, 5), Random.cword(3, 5),];
     var bookList = mock({
-        books: {
-            count: 20,
-            'start|0-99': 0,
-            'total|0-99': 0,
-            books: [
-                { id: Random.id(), title: title[0], latestSellers: [{ id: Random.id(), avatar: Random.image('28x28', '#643a48', '#ffffff', 'avatar') }], author: Random.cname(), 'rating|0-9.1': 0, 'price|0-99.1': 0, 'originalPrice|99-999.1': 0, images: Random.image('90x128', '#643a48', '#ffffff', title[0]) },
-                { id: Random.id(), title: title[1], latestSellers: [{ id: Random.id(), avatar: Random.image('28x28', '#643a48', '#ffffff', 'avatar') }], author: Random.cname(), 'rating|0-9.1': 0, 'price|0-99.1': 0, 'originalPrice|99-999.1': 0, images: Random.image('90x128', '#643a48', '#ffffff', title[1]) },
-                { id: Random.id(), title: title[2], latestSellers: [{ id: Random.id(), avatar: Random.image('28x28', '#643a48', '#ffffff', 'avatar') }], author: Random.cname(), 'rating|0-9.1': 0, 'price|0-99.1': 0, 'originalPrice|99-999.1': 0, images: Random.image('90x128', '#643a48', '#ffffff', title[2]) },
-                { id: Random.id(), title: title[3], latestSellers: [{ id: Random.id(), avatar: Random.image('28x28', '#643a48', '#ffffff', 'avatar') }], author: Random.cname(), 'rating|0-9.1': 0, 'price|0-99.1': 0, 'originalPrice|99-999.1': 0, images: Random.image('90x128', '#643a48', '#ffffff', title[3]) },
-                { id: Random.id(), title: title[4], latestSellers: [{ id: Random.id(), avatar: Random.image('28x28', '#643a48', '#ffffff', 'avatar') }], author: Random.cname(), 'rating|0-9.1': 0, 'price|0-99.1': 0, 'originalPrice|99-999.1': 0, images: Random.image('90x128', '#643a48', '#ffffff', title[4]) },
-                { id: Random.id(), title: title[5], latestSellers: [{ id: Random.id(), avatar: Random.image('28x28', '#643a48', '#ffffff', 'avatar') }], author: Random.cname(), 'rating|0-9.1': 0, 'price|0-99.1': 0, 'originalPrice|99-999.1': 0, images: Random.image('90x128', '#643a48', '#ffffff', title[5]) },
-                { id: Random.id(), title: title[6], latestSellers: [{ id: Random.id(), avatar: Random.image('28x28', '#643a48', '#ffffff', 'avatar') }], author: Random.cname(), 'rating|0-9.1': 0, 'price|0-99.1': 0, 'originalPrice|99-999.1': 0, images: Random.image('90x128', '#643a48', '#ffffff', title[6]) },
-                { id: Random.id(), title: title[7], latestSellers: [{ id: Random.id(), avatar: Random.image('28x28', '#643a48', '#ffffff', 'avatar') }], author: Random.cname(), 'rating|0-9.1': 0, 'price|0-99.1': 0, 'originalPrice|99-999.1': 0, images: Random.image('90x128', '#643a48', '#ffffff', title[7]) },
-            ]
-        }
+        count: 20,
+        'start|0-99': 0,
+        'total|0-99': 0,
+        result: [
+            { id: Random.id(), title: title[0], latestSellers: [{ id: Random.id(), avatar: Random.image('28x28', '#643a48', '#ffffff', 'avatar') }], author: Random.cname(), 'rating|0-9.1': 0, 'price|0-99.1': 0, 'originalPrice|99-999.1': 0, images: Random.image('90x128', '#643a48', '#ffffff', title[0]) },
+            { id: Random.id(), title: title[1], latestSellers: [{ id: Random.id(), avatar: Random.image('28x28', '#643a48', '#ffffff', 'avatar') }], author: Random.cname(), 'rating|0-9.1': 0, 'price|0-99.1': 0, 'originalPrice|99-999.1': 0, images: Random.image('90x128', '#643a48', '#ffffff', title[1]) },
+            { id: Random.id(), title: title[2], latestSellers: [{ id: Random.id(), avatar: Random.image('28x28', '#643a48', '#ffffff', 'avatar') }], author: Random.cname(), 'rating|0-9.1': 0, 'price|0-99.1': 0, 'originalPrice|99-999.1': 0, images: Random.image('90x128', '#643a48', '#ffffff', title[2]) },
+            { id: Random.id(), title: title[3], latestSellers: [{ id: Random.id(), avatar: Random.image('28x28', '#643a48', '#ffffff', 'avatar') }], author: Random.cname(), 'rating|0-9.1': 0, 'price|0-99.1': 0, 'originalPrice|99-999.1': 0, images: Random.image('90x128', '#643a48', '#ffffff', title[3]) },
+            { id: Random.id(), title: title[4], latestSellers: [{ id: Random.id(), avatar: Random.image('28x28', '#643a48', '#ffffff', 'avatar') }], author: Random.cname(), 'rating|0-9.1': 0, 'price|0-99.1': 0, 'originalPrice|99-999.1': 0, images: Random.image('90x128', '#643a48', '#ffffff', title[4]) },
+            { id: Random.id(), title: title[5], latestSellers: [{ id: Random.id(), avatar: Random.image('28x28', '#643a48', '#ffffff', 'avatar') }], author: Random.cname(), 'rating|0-9.1': 0, 'price|0-99.1': 0, 'originalPrice|99-999.1': 0, images: Random.image('90x128', '#643a48', '#ffffff', title[5]) },
+            { id: Random.id(), title: title[6], latestSellers: [{ id: Random.id(), avatar: Random.image('28x28', '#643a48', '#ffffff', 'avatar') }], author: Random.cname(), 'rating|0-9.1': 0, 'price|0-99.1': 0, 'originalPrice|99-999.1': 0, images: Random.image('90x128', '#643a48', '#ffffff', title[6]) },
+            { id: Random.id(), title: title[7], latestSellers: [{ id: Random.id(), avatar: Random.image('28x28', '#643a48', '#ffffff', 'avatar') }], author: Random.cname(), 'rating|0-9.1': 0, 'price|0-99.1': 0, 'originalPrice|99-999.1': 0, images: Random.image('90x128', '#643a48', '#ffffff', title[7]) },
+        ]
     });
     return bookList;
 }
@@ -207,36 +205,13 @@ router.get('/api/users/:id', (req, res) => {
 
 router.get('/api/users/:id/sold-books', (req, res) => {
     res.send(mock({
-        sold: {
-            'count': 20,
-            'start|0-99': 0,
-            'total|0-99': 0,
-            'books|1-3': [{
-                'created|+1': [Random.date('yyyy-MM-dd'), Random.date('yyyy-MM-dd'), Random.date('yyyy-MM-dd')],
-                'soldCount|0-9': 0,
-                'userBooks|1-6': [{
-                    'stock|1': true,
-                    'wishCount|1-66': 0,
-                    'id|+1': [Random.id(), Random.id(), Random.id(), Random.id(), Random.id(), Random.id()],
-                    'image|+1': [
-                        Random.image('90x128', '#643a48', '#ffffff', 'sold-book'), Random.image('90x128', '#643a48', '#ffffff', 'sold-book'),
-                        Random.image('90x128', '#643a48', '#ffffff', 'sold-book'), Random.image('90x128', '#643a48', '#ffffff', 'sold-book'),
-                        Random.image('90x128', '#643a48', '#ffffff', 'sold-book'), Random.image('90x128', '#643a48', '#ffffff', 'sold-book')
-                    ],
-                    'title|+1': [Random.ctitle(), Random.ctitle(), Random.ctitle(), Random.ctitle(), Random.ctitle(), Random.ctitle()]
-                }]
-            }]
-        }
-    }));
-});
-
-router.get('/api/users/:id/owning-books', (req, res) => {
-    res.send(mock({
-        owning: {
-            'count': 20,
-            'start|0-99': 0,
-            'total|0-99': 0,
-            'books|1-6': [{
+        count: 20,
+        'start|0-99': 0,
+        'total|0-99': 0,
+        'result|1-3': [{
+            'created|+1': [Random.date('yyyy-MM-dd'), Random.date('yyyy-MM-dd'), Random.date('yyyy-MM-dd')],
+            'soldCount|0-9': 0,
+            'userBooks|1-6': [{
                 'stock|1': true,
                 'wishCount|1-66': 0,
                 'id|+1': [Random.id(), Random.id(), Random.id(), Random.id(), Random.id(), Random.id()],
@@ -247,7 +222,26 @@ router.get('/api/users/:id/owning-books', (req, res) => {
                 ],
                 'title|+1': [Random.ctitle(), Random.ctitle(), Random.ctitle(), Random.ctitle(), Random.ctitle(), Random.ctitle()]
             }]
-        }
+        }]
+    }));
+});
+
+router.get('/api/users/:id/owning-books', (req, res) => {
+    res.send(mock({
+        count: 20,
+        'start|0-99': 0,
+        'total|0-99': 0,
+        'result|0-6': [{
+            'stock|1': true,
+            'wishCount|1-66': 0,
+            'id|+1': [Random.id(), Random.id(), Random.id(), Random.id(), Random.id(), Random.id()],
+            'image|+1': [
+                Random.image('90x128', '#643a48', '#ffffff', 'sold-book'), Random.image('90x128', '#643a48', '#ffffff', 'owning-book'),
+                Random.image('90x128', '#643a48', '#ffffff', 'sold-book'), Random.image('90x128', '#643a48', '#ffffff', 'owning-book'),
+                Random.image('90x128', '#643a48', '#ffffff', 'sold-book'), Random.image('90x128', '#643a48', '#ffffff', 'owning-book')
+            ],
+            'title|+1': [Random.ctitle(), Random.ctitle(), Random.ctitle(), Random.ctitle(), Random.ctitle(), Random.ctitle()]
+        }]
     }));
 });
 
@@ -267,19 +261,17 @@ router.get('/api/tags/:id/books', (req, res) => {
 
 router.get('/api/books/:id/sellers', (req, res) => {
     res.send(mock({
-        sellers: {
-            'count': 20,
-            'start|0-99': 0,
-            'total|0-99': 0,
-            'sellers|1-6': [
-                {
-                    'id|+1': [Random.id(), Random.id(), Random.id(), Random.id(), Random.id(), Random.id()],
-                    'name|+1': [Random.cname(), Random.cname(), Random.cname(), Random.cname(), Random.cname(), Random.cname(),],
-                    'soldBookCount|0-99': 0,
-                    'avatar|+1': [Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar'),]
-                }
-            ]
-        }
+        count: 20,
+        'start|0-99': 0,
+        'total|0-99': 0,
+        'result|12': [
+            {
+                'id|+1': [Random.id(), Random.id(), Random.id(), Random.id(), Random.id(), Random.id(), Random.id(), Random.id(), Random.id(), Random.id(), Random.id(), Random.id()],
+                'name|+1': [Random.cname(), Random.cname(), Random.cname(), Random.cname(), Random.cname(), Random.cname(), Random.cname(), Random.cname(), Random.cname(), Random.cname(), Random.cname(), Random.cname()],
+                'soldBookCount|0-99': 0,
+                'avatar|+1': [Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar'), Random.image('30x30', '#643a48', '#fff', 'avatar')]
+            }
+        ]
     }));
 });
 

@@ -2,12 +2,11 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Home from '../components/views/Home.vue';
+import GetList from '../components/commons/GetList.vue';
 import Books from '../components/views/Books.vue';
 import CollectionMenu from '../components/views/CollectionMenu.vue';
 import Collection from '../components/views/Collection.vue';
 import Users from '../components/views/Users.vue';
-import OwningShelf from '../components/views/Users/OwningShelf.vue';
-import SoldShelf from '../components/views/Users/SoldShelf.vue';
 import Tags from '../components/views/Tags.vue';
 import Sellers from '../components/views/Sellers.vue';
 import Search from '../components/views/Search.vue';
@@ -23,13 +22,15 @@ const routes = [{
         default: Home,
         ViewNav
     },
-}, {
-    path: '/categories/:id',
-    components: {
-        default: Home,
-        ViewNav
-    },
-    props: { default: true }
+    children: [{
+        path: '',
+        component: GetList,
+        props: { url: '/api/home_books', widget: 'bookList' }
+    }, {
+        path: 'categories/:id',
+        component: GetList,
+        props: ({ params: { id } }) => ({ url: `/api/categories/${id}/books`, widget: 'bookList' })
+    }]
 }, {
     path: '/collections',
     components: {
@@ -37,12 +38,16 @@ const routes = [{
         ViewNav
     },
 }, {
-    path: '/collections/:id',
+    path: '/collections',
     components: {
         default: Collection,
         ViewNav
     },
-    props: { default: true }
+    children: [{
+        path: ':id',
+        component: GetList,
+        props: ({ params: { id } }) => ({ url: `/api/collections/${id}/books`, widget: 'bookList' })
+    }]
 }, {
     path: '/users/:id',
     components: {
@@ -52,12 +57,12 @@ const routes = [{
     props: { default: true },
     children: [{
         path: 'owning-bookshelf',
-        component: OwningShelf,
-        props: true
+        component: GetList,
+        props: ({ params: { id } }) => ({ url: `/api/users/${id}/owning-books`, widget: 'bookStack' })
     }, {
         path: 'sold-bookshelf',
-        component: SoldShelf,
-        props: true
+        component: GetList,
+        props: ({ params: { id } }) => ({ url: `/api/users/${id}/sold-books`, widget: 'soldLog' })
     }]
 }, {
     path: '/books/:id',
@@ -67,19 +72,29 @@ const routes = [{
     },
     props: { default: true }
 }, {
-    path: '/tags/:id',
+    path: '/tags',
     components: {
         default: Tags,
         ViewNav
     },
+    children: [{
+        path: ':id',
+        component: GetList,
+        props: ({ params: { id } }) => ({ url: `/api/tags/${id}/books`, widget: 'bookList' })
+    }],
     props: { default: true }
 }, {
-    name: 'sellerView',
     path: '/books/:id/users',
     components: {
         default: Sellers,
         ViewNav
     },
+    children: [{
+        name: 'sellerView',
+        path: '',
+        component: GetList,
+        props: ({ params: { id } }) => ({ url: `/api/books/${id}/sellers`, widget: 'sellerList' })
+    }],
     props: { default: true }
 }, {
     path: '/search',

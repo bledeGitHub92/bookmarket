@@ -34,7 +34,6 @@ export default {
             ajax.get('/api/collections', 'collections')
                 .then(({ data }) => {
                     this.collections = data;
-                    console.log(data);
                 });
         }
     },
